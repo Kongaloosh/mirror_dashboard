@@ -17,6 +17,8 @@ PASSWORD = config.get('SiteAuthentication', 'password')
 DOMAIN_NAME = config.get('Global', 'DomainName')
 GEONAMES = config.get('GeoNamesUsername', 'Username')
 FULLNAME = config.get('PersonalInfo', 'FullName')
+LOCATION_ID = config.get('OpenWeather', 'id')
+OW_KEY = config.get('OpenWeather', 'key')
 
 # create our little application :)
 app = Flask(__name__)
@@ -55,7 +57,7 @@ def teardown_request(exception):
 @app.route('/')
 def show_entries():
     """The index page; what is presented when the user lands at the site. This is where the dashboard will be setup."""
-    return render_template('index.html')
+    return render_template('index.html', open_weather_key=OW_KEY, location=LOCATION_ID)
 
 
 if __name__ == "__main__":
