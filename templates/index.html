@@ -11,18 +11,20 @@
 <body onload="setUp()">
 
 <div class="container fill">
-    <div class="row h-25">
-        <div class="col-sm-12 h-100 d-table">
-            <div class="card card-block d-table-cell align-middle text-center">
-                <div id="date-time">
-                    <div id="date"> </div> <div id="time"> </div>
+    <div class="row h-25 row flex-nowrap justify-content-between align-items-center">
+        <div class="weather-card col-4">
+                    <div id="date-time">
+                        <h2 id="date"> </h2> <h4 id="time"> </h4>
+                    </div>
                 </div>
-                <div id="weather">
-                    <i id="weather-icon" class="fa fa-question-circle"></i> <strong id="weather-temp"><i class="fa fa-question-circle"></i>&degC</strong>
-                </div>
+        <div class="weather-card col-4">
+            <div id="weather">
+                <h1><i id="weather-icon" class="fa fa-question-circle"></i></h1> <h4 id="weather-temp"><i class="fa fa-question-circle"></i>&degC</h4>
             </div>
         </div>
     </div>
+
+
     <div class="row h-25">
         <div class="col-sm-12 h-100 d-table">
             <div class="card card-block d-table-cell align-middle text-center">
