@@ -16,8 +16,6 @@ monthNames = ["January", "February", "March", "April", "May", "June",
 
 dayNames = ['Mon', "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"]
 
-var today = new Date();
-
 function weather(){
     // Open a new connection, using the GET request on the URL endpoint
     fetch('/weather')
@@ -36,6 +34,7 @@ function weather(){
 }
 
 function time(){
+    var today = new Date();
     document.getElementById("date").innerText = dayNames[today.getDay()-1]+' '+monthNames[today.getMonth()]+' '+today.getDate();
     document.getElementById("time").innerText = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
 }
