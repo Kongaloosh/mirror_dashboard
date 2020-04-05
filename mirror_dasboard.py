@@ -3,6 +3,7 @@ import sqlite3
 from contextlib import closing
 import os
 from configparser import ConfigParser
+from requests import get
 
 __author__ = 'kongaloosh'
 
@@ -17,8 +18,14 @@ PASSWORD = config.get('SiteAuthentication', 'password')
 DOMAIN_NAME = config.get('Global', 'DomainName')
 GEONAMES = config.get('GeoNamesUsername', 'Username')
 FULLNAME = config.get('PersonalInfo', 'FullName')
-LOCATION_ID = config.get('OpenWeather', 'id')
+
 OW_KEY = config.get('OpenWeather', 'key')
+LOCATION_ID = config.get('OpenWeather', 'id')
+LOCATION_NAME = config.get('OpenWeather', 'name')
+COUNTRY = config.get('OpenWeather', 'country')
+LAT = config.get('OpenWeather', 'lat')
+LON = config.get('OpenWeather', 'lon')
+
 
 # create our little application :)
 app = Flask(__name__)
@@ -58,6 +65,12 @@ def teardown_request(exception):
 def show_entries():
     """The index page; what is presented when the user lands at the site. This is where the dashboard will be setup."""
     return render_template('index.html', open_weather_key=OW_KEY, location=LOCATION_ID)
+
+
+@app.route('/weather')
+def weather():
+    """"""
+    return get(f'https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={OW_KEY}&units=metric').json()
 
 
 if __name__ == "__main__":
