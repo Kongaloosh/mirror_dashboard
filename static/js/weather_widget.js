@@ -16,28 +16,36 @@ monthNames = ["January", "February", "March", "April", "May", "June",
 
 dayNames = ['Mon', "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"]
 
-var request = new XMLHttpRequest()
-// Open a new connection, using the GET request on the URL endpoint
-request.open('GET', '/weather', true)
+var today = new Date();
 
-window.setInterval(function(){
-    var today = new Date();
+function weather(){
+    // Open a new connection, using the GET request on the URL endpoint
+    fetch('/weather')
+        .then(
+        function(request){
+            if(request.status >= 200 && request.status < 400){
+                request.json().then(function(data) {
+                    document.getElementById("weather-icon").className = 'fa ' + icons[data['weather'][0]['description']];
+                    document.getElementById("weather-temp").innerText = data['main']['feels_like'].toString() + '\u2103';
+                    console.log(data)
+                });
+            }else {
+                console.log('error')
+            }
+        })
+}
+
+function time(){
     document.getElementById("date").innerText = dayNames[today.getDay()-1]+' '+monthNames[today.getMonth()]+' '+today.getDate();
     document.getElementById("time").innerText = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
-}, 1000);
+}
 
+function setUp(){
+    weather()
+    time()
+}
 
-window.setInterval(function(){
-    var data = JSON.parse(request.response)
-    // Send request
-    if (request.status >= 200 && request.status < 400) {
-        document.getElementById("weather-icon").className = 'fa ' + icons[data['weather'][0]['description']]
-        document.getElementById("weather-temp").innerText = data['main']['feels_like'].toString() + '\u2103'
-    console.log(data)
-  } else {
-    console.log('error')
-  }
+window.setInterval(time, 1000);
 
-}, 10000);
+window.setInterval(weather, 10000);
 
-request.send()
