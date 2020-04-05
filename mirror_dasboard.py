@@ -4,6 +4,9 @@ from contextlib import closing
 import os
 from configparser import ConfigParser
 from requests import get
+import json
+import yfinance as yf
+from urllib.error import HTTPError
 
 __author__ = 'kongaloosh'
 
@@ -25,7 +28,6 @@ LOCATION_NAME = config.get('OpenWeather', 'name')
 COUNTRY = config.get('OpenWeather', 'country')
 LAT = config.get('OpenWeather', 'lat')
 LON = config.get('OpenWeather', 'lon')
-
 
 # create our little application :)
 app = Flask(__name__)
@@ -71,6 +73,20 @@ def show_entries():
 def weather():
     """"""
     return get(f'https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={OW_KEY}&units=metric').json()
+
+
+@app.route('/stocks')
+def stocks():
+    """"""
+    with open('stocks.json') as f:
+        stocks = json.load(f)
+        data = []
+        for ticker in stocks['tickers']:
+            try:
+                data.append(yf.Ticker(ticker).info)
+            except (IndexError, HTTPError):
+                app.logger.info(ticker, yf.Ticker(ticker).info)
+    return json.dumps(data)
 
 
 if __name__ == "__main__":

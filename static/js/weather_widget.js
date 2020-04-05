@@ -14,7 +14,7 @@ icons = {
 monthNames = ["January", "February", "March", "April", "May", "June",
   "July", "August", "September", "October", "November", "December"]
 
-dayNames = ['Mon', "Tues", "Wed", "Thur", "Fri", "Sat", "Sun"]
+dayNames = ["Sun", 'Mon', "Tues", "Wed", "Thur", "Fri", "Sat"]
 
 function weather(){
     // Open a new connection, using the GET request on the URL endpoint
@@ -35,7 +35,7 @@ function weather(){
 
 function time(){
     var today = new Date();
-    document.getElementById("date").innerText = dayNames[today.getDay()-1]+' '+monthNames[today.getMonth()]+' '+today.getDate();
+    document.getElementById("date").innerText = dayNames[today.getDay()]+' '+monthNames[today.getMonth()]+' '+today.getDate();
     document.getElementById("time").innerText = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds()
 }
 
