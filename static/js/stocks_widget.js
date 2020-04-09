@@ -28,6 +28,7 @@ function stocks(){
 
                         var chartCanvas = document.createElement("canvas");
                         chartCanvas.id = "myChart" + String(idx);
+                        chartCanvas
 
                         ticker_entry.append(chartCanvas);
                         ticker_container.append(ticker_entry);
@@ -40,44 +41,27 @@ function stocks(){
                 for (var idx = 0; idx < data.length; idx++) {
 
                    var ctx = document.getElementById("myChart"+String(idx)).getContext('2d');
-                        ctx.fillStyle = "#92B901";
-                        ctx.fillRect(50, 50, 100, 100);
-                        console.log(data)
-                        var myChart = new Chart(ctx, {
-                        type: 'bar',
-                        data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                            datasets: [{
-                                label: '# of Votes',
-                                data: [12, 19, 3, 5, 2, 3],
-                                backgroundColor: [
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(54, 162, 235, 0.2)',
-                                    'rgba(255, 206, 86, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 159, 64, 0.2)'
-                                ],
-                                borderColor: [
-                                    'rgba(255, 99, 132, 1)',
-                                    'rgba(54, 162, 235, 1)',
-                                    'rgba(255, 206, 86, 1)',
-                                    'rgba(75, 192, 192, 1)',
-                                    'rgba(153, 102, 255, 1)',
-                                    'rgba(255, 159, 64, 1)'
-                                ],
-                                borderWidth: 1
+                    ctx.responsive = true;
+                    console.log(Array.from(Array(data[idx]['history'].length).keys()))
+                    var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: data[idx]['history']['label'],
+                        datasets: [{
+                            label: 'Daily change',
+                            data: data[idx]['history']['data'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
                             }]
-                        },
-                        options: {
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
                         }
+                    }
                     });
                     }
                 }

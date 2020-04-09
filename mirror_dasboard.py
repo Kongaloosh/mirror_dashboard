@@ -83,9 +83,16 @@ def stocks():
         data = []
         for ticker in stocks['tickers']:
             try:
-                data.append(yf.Ticker(ticker).info)
+                ticker = yf.Ticker(ticker)
+                stock_info = ticker.info
+                stock_info['history'] = {
+                    'label': [i.strftime("%b %d") for i in ticker.history(period='1mo').index.tolist()],
+                    'data': ticker.history(period="1mo")['Close'].values.tolist()
+                }
+                data.append(stock_info)
             except (IndexError, HTTPError):
                 app.logger.info(ticker, yf.Ticker(ticker).info)
+
     return json.dumps(data)
 
 
