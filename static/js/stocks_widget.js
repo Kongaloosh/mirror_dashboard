@@ -16,23 +16,72 @@ function stocks(){
                         var ticker_container = document.createElement("div");
                         ticker_container.className = "carousel-item";
 
+                        var ticker_wrapper = document.createElement("div");
+                        ticker_wrapper.className = "row"
+
                         if (idx == 0) {
                             ticker_container.className += " active";
                         }
 
-                        var ticker_entry = document.createElement("div");
-                        ticker_entry.className = "d-block w-100";
+                        // add chart
 
-                        var change = data[idx]['regularMarketPrice'] - data[idx]['open'];
+                        var ticker_entry = document.createElement("div");
+                        ticker_entry.className = "d-block col-sm-4";
+
+                        var change = data[idx]['ask'];
                         ticker_entry.innerText = data[idx]["symbol"] + " " + String(change);
 
                         var chartCanvas = document.createElement("canvas");
                         chartCanvas.id = "myChart" + String(idx);
-                        chartCanvas
 
                         ticker_entry.append(chartCanvas);
-                        ticker_container.append(ticker_entry);
+                        ticker_wrapper.append(ticker_entry);
+
                         ticker_entries.append(ticker_container);
+
+                        // add details
+
+                        var quote_details = document.createElement("div");
+                        quote_details.className = "d-block col-sm-8"
+
+                        var price = document.createElement("data")
+                        price.innerText = data[idx]['ask']
+                        price.className = "ask-price"
+                        quote_details.append(
+                            price
+                        ) + " "
+
+                        var open = document.createElement("data")
+                        open.innerText = data[idx]['open']
+                        open.className = "open"
+                        quote_details.append(
+                            open
+                        ) + " "
+
+                        var high = document.createElement("data")
+                        high.innerText = data[idx]['dayHigh']
+                        high.className = "high"
+                        quote_details.append(
+                            high
+                        ) + " "
+
+                        var low = document.createElement("data")
+                        low.className = "low"
+                        low.innerText = data[idx]['dayLow']
+                        quote_details.append(
+                            low
+                        ) + " "
+
+
+                        var volume = document.createElement("data")
+                        volume.innerText = price.innerText = data[idx]['volume']
+                        volume.className = "volume"
+                        quote_details.append(
+                            volume
+                        ) + " "
+                     ticker_wrapper.append(quote_details)
+                     ticker_container.append(ticker_wrapper)
+
 
                 }
 
@@ -80,28 +129,3 @@ function setUp(){
 stocks()
 
 window.setInterval(stocks, 1000000);
-
-/*
-        =====================================================================
-                                    Carousel
-        =====================================================================
-*/
-
-var slideIndex = 1;
-showDivs(slideIndex);
-
-function plusDivs(n) {
-  showDivs(slideIndex += n);
-}
-
-function showDivs(n) {
-  var i;
-  var x = document.getElementsByClassName("mySlides");
-  if (n > x.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = x.length}
-  for (i = 0; i < x.length; i++) {
-    x[i].style.display = "none";
-  }
-  x[slideIndex-1].style.display = "block";
-
-}

@@ -24,6 +24,7 @@ html, body {
   clear: both;
 }
 
+
 /*
     =====================================================================
                                 Carousel
@@ -36,13 +37,6 @@ html, body {
   border: solid 1px blue;
   width: 100%;
 }
-
-* {
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-body { font-family: sans-serif; }
 
 .gallery {
   background: #EEE;
@@ -72,4 +66,32 @@ body { font-family: sans-serif; }
     margin-left: auto;
     width: 800px;
 }
+
+/*
+*  Rotater
+*/
+/*
+body{
+    margin:0;
+    overflow:hidden;
+}
+.wrapper{
+    transform: rotate(90deg);
+    transform-origin:bottom left;
+
+
+    position:absolute;
+    top: -100vw;
+    left: 0;
+
+    height:100vw;
+    width:100vh;
+
+   # background-color:#000;
+   # color:#fff;
+
+    overflow:auto;
+
+}
+*/
 
