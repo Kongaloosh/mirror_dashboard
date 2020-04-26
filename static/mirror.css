@@ -1,6 +1,16 @@
 html, body {
   height: 100%;
   min-height: 100%;
+  background-color:black;
+}
+
+p,a,strong,h1,h2,h3,h4,i {
+color: white;
+
+}
+
+.card{
+background-color:black;
 }
 
 .fill {
@@ -78,7 +88,6 @@ body{
 .wrapper{
     transform: rotate(90deg);
     transform-origin:bottom left;
-
 
     position:absolute;
     top: -100vw;
