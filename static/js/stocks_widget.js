@@ -92,27 +92,49 @@ function stocks(){
                    var ctx = document.getElementById("myChart"+String(idx)).getContext('2d');
                     ctx.responsive = true;
                     console.log(Array.from(Array(data[idx]['history'].length).keys()))
-                    var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        labels: data[idx]['history']['label'],
-                        datasets: [{
-                            label: 'Daily change',
-                            data: data[idx]['history']['data'],
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
+                    var myChart = new Chart(ctx,
+                    {
+                        type: 'line',
+                        data: {
+                            labels: data[idx]['history']['label'],
+                            datasets: [{
+                                label: 'Daily change',
+                                data: data[idx]['history']['data'],
+                                borderWidth: 1,
+                                borderColor: 'rgb(235, 255, 236)',
+                                pointBackgroundColor: 'rgb(235, 255, 236)',
                             }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: false,
+                                        fontColor:'rgb(235, 255, 236)',
+                                    },
+                                    gridLines: {
+                                        color: 'gb(235, 255, 236, 0.3)',
+                                        display: true,
+                                  },
+                                }],
+                                xAxes: [{
+                                    ticks: {
+                                        fontColor:'rgb(235, 255, 236)',
+                                    },
+                                    gridLines: {
+                                        color: 'gb(235, 255, 236, 0.3)',
+                                        display: true,
+                                  },
+                                }]
+                            },
+                          pointLabels: {
+                            fontColor: 'white' // labels around the edge like 'Running'
+                          },
                         }
                     }
-                    });
-                    }
+
+                    );
+                   }
                 }
 
                 );
