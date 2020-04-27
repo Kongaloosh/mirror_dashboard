@@ -15,16 +15,16 @@
 <script src="{{url_for('static', filename='js/carousel.js')}}"></script>
 <body onload="setUp()">
 
-<div class="container wrapper fill">
+<div class="container-fluid wrapper fill">
     <div class="row h-25 row flex-nowrap justify-content-between align-items-center">
-        <div class="weather-card col-4">
+        <div class="weather-card col-6">
                     <div id="date-time">
-                        <h2 id="date"> </h2> <h4 id="time"> </h4>
+                        <h1 id="date"> </h1> <h2 id="time"> </h2>
                     </div>
                 </div>
-        <div class="weather-card col-4">
+        <div class="weather-card col-6">
             <div id="weather">
-                <h1><i id="weather-icon" class="fa fa-question-circle"></i></h1> <h4 id="weather-temp"><i class="fa fa-question-circle"></i>&degC</h4>
+                <h1><i id="weather-icon" class="fa fa-question-circle"></i></h1> <h2 id="weather-temp"><i class="fa fa-question-circle"></i>&degC</h2>
             </div>
         </div>
     </div>
