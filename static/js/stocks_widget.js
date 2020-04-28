@@ -26,7 +26,7 @@ function stocks(){
                         // add chart
 
                         var ticker_entry = document.createElement("div");
-                        ticker_entry.className = "d-block col-sm-4";
+                        ticker_entry.className = "d-block col-sm-6";
 
                         var change = data[idx]['ask'];
                         ticker_entry.innerText = data[idx]["symbol"] + " " + String(change);
@@ -42,7 +42,7 @@ function stocks(){
                         // add details
 
                         var quote_details = document.createElement("div");
-                        quote_details.className = "d-block col-sm-8"
+                        quote_details.className = "d-block col-sm-6"
 
                         var price = document.createElement("data")
                         price.innerText = data[idx]['ask']
@@ -113,7 +113,7 @@ function stocks(){
                                         fontColor:'rgb(235, 255, 236)',
                                     },
                                     gridLines: {
-                                        color: 'gb(235, 255, 236, 0.3)',
+                                        color: 'rgb(235, 255, 236, 0.3)',
                                         display: true,
                                   },
                                 }],
