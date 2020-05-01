@@ -13,6 +13,7 @@
 <script src="{{url_for('static', filename='js/Chart.min.js')}}"></script>
 <script src="{{url_for('static', filename='js/stocks_widget.js')}}"></script>
 <script src="{{url_for('static', filename='js/carousel.js')}}"></script>
+<script src="{{url_for('static', filename='js/garden.js')}}"></script>
 <body onload="setUp()">
 
 <div class="container-fluid wrapper fill">
@@ -39,9 +40,24 @@
     </div>
     <div class="row h-25">
         <div class="col-sm-12 h-100 d-table">
-            <div class="card card-block d-table-cell align-middle text-center">
-                <p>Personal Stuff</p>
-            </div>
+            <div class="row align-middle text-center">
+                <div class="d-block col-lg-6">
+                    <p>personal</p>
+                </div>
+                <div class="d-block col-lg-6">
+                    <div class="row">
+                        <div class="d-block col-lg-6">
+                            <h2>Garden</h2>
+                            <h4 id="garden_temperature">Temperature</h4>
+                            <h4 id="garden_moisture">Soil Moisture</h4>
+                            <h4 id="garden_humidity">Humidity</h4>
+                        </div>
+                        <div class="d-block col-lg-4">
+                            <img class="img-responsive img-thumbnail img-fluid" id="garden_pic" src="/">
+                        </div>
+                    </div> <!-- Row-wrapper for HUD of Garden -->
+                </div> <!-- Garden components -->
+            </div> <!--Personal block -->
         </div>
     </div>
     <div class="row h-25">

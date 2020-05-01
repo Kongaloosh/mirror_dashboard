@@ -74,6 +74,10 @@ def weather():
     """"""
     return get(f'https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={OW_KEY}&units=metric').json()
 
+@app.route('/garden')
+def garden():
+    return get('http://192.168.1.12:80', headers={'Accept': 'application/json'}).json()
+
 
 @app.route('/stocks')
 def stocks():
