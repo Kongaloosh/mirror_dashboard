@@ -27,9 +27,8 @@ function stocks(){
 
                         var ticker_entry = document.createElement("div");
                         ticker_entry.className = "d-block col-sm-6";
-
+                        var title = data[idx]["symbol"]
                         var change = data[idx]['ask'];
-                        ticker_entry.innerText = data[idx]["symbol"] + " " + String(change);
 
                         var chartCanvas = document.createElement("canvas");
                         chartCanvas.id = "myChart" + String(idx);
@@ -44,41 +43,49 @@ function stocks(){
                         var quote_details = document.createElement("div");
                         quote_details.className = "d-block col-sm-6"
 
-                        var price = document.createElement("data")
-                        price.innerText = data[idx]['ask']
+                        var price = document.createElement("h4")
+                        price.innerText = data[idx]["symbol"]
+                        price.className = "ticker_symbol text-center"
+                        quote_details.append(
+                            price
+                        ) + " "
+
+                        var price = document.createElement("h4")
+                        price.innerText = "Current Ask: " + data[idx]['ask'].toString()
                         price.className = "ask-price"
                         quote_details.append(
                             price
                         ) + " "
 
-                        var open = document.createElement("data")
-                        open.innerText = data[idx]['open']
+                        var open = document.createElement("h4")
+                        open.innerText ="Open: " + data[idx]['open'].toString()
                         open.className = "open"
                         quote_details.append(
                             open
                         ) + " "
 
-                        var high = document.createElement("data")
-                        high.innerText = data[idx]['dayHigh']
+                        var high = document.createElement("h4")
+                        high.innerText = "Today's High:"  + data[idx]['dayHigh'].toString()
                         high.className = "high"
                         quote_details.append(
                             high
                         ) + " "
 
-                        var low = document.createElement("data")
+                        var low = document.createElement("h4")
                         low.className = "low"
-                        low.innerText = data[idx]['dayLow']
+                        low.innerText = "Today's low: " + data[idx]['dayLow'].toString()
                         quote_details.append(
                             low
                         ) + " "
 
 
-                        var volume = document.createElement("data")
-                        volume.innerText = price.innerText = data[idx]['volume']
+                        var volume = document.createElement("h4")
+                        volume.innerText = "Volume traded: " + data[idx]['volume'].toString()
                         volume.className = "volume"
                         quote_details.append(
                             volume
                         ) + " "
+
                      ticker_wrapper.append(quote_details)
                      ticker_container.append(ticker_wrapper)
 
