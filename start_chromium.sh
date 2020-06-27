@@ -1,0 +1,1 @@
+DISPLAY=:0 chromium-browser --kiosk --start-fullscreen --aggressive-cache-discard --disk-cache-dir=/dev/null --disk-cache-size=1 --media-cache-size=1 --check-for-update-interval=31536000 --incognito http://127.0.0.1:5000
