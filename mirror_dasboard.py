@@ -7,6 +7,44 @@ from requests import get
 import json
 import yfinance as yf
 from urllib.error import HTTPError
+import sqlite3
+import requests
+import newspaper as newspaper
+from configparser import ConfigParser
+import os
+from contextlib import closing
+import datetime
+from newspaper.article import ArticleException
+from nltk import word_tokenize, pos_tag, ne_chunk, sent_tokenize, ne_chunk_sents
+
+
+def extract_entity_names(t):
+    entity_names = []
+
+    if hasattr(t, 'label') and t.label:
+        if t.label() == 'NE':
+            entity_names.append(' '.join([child[0].title() for child in t]))
+        else:
+            for child in t:
+                entity_names.extend(extract_entity_names(child))
+
+    return entity_names
+
+
+def entity_extractor(sentence):
+    sentences = sent_tokenize(sentence)
+    tokenized_sentences = [word_tokenize(sentence) for sentence in sentences]
+    tagged_sentences = [pos_tag(sentence) for sentence in tokenized_sentences]
+    chunked_sentences = ne_chunk_sents(tagged_sentences, binary=True)
+
+    entity_names = []
+    for tree in chunked_sentences:
+        # Print results per sentence
+        # print extract_entity_names(tree)
+
+        entity_names.extend(extract_entity_names(tree))
+    return entity_names
+
 
 __author__ = 'kongaloosh'
 
@@ -98,6 +136,51 @@ def stocks():
                 app.logger.info(ticker, yf.Ticker(ticker).info)
 
     return json.dumps(data)
+
+
+@app.route("/news")
+def news():
+    source = 'https://www.economist.com/'
+    paper = newspaper.build(source, memoize_articles=False)
+    articles = []
+    for article in paper.articles:
+        authors = None
+
+        article.download()
+        article.parse()
+        if len(article.authors) > 0:
+            try:
+                authors = article.authors[0] + ", ".join(authors[1:])
+            except (IndexError, AttributeError,TypeError):
+                authors = article.authors[0]
+
+        title = article.title
+        published = article.publish_date
+        if published is None:
+            published = datetime.datetime.now()
+
+        try:
+            image = article.images.pop()
+        except IndexError:
+            image = None
+
+        article.nlp()
+        summary = article.summary
+        keywords = entity_extractor(article.text)
+        url = article.url
+        location = None
+
+        articles.append({
+            'title':title,
+            'published':published.strftime("%b %d"),
+            'image':image,
+            'summary':summary.split("\n")[:4],
+            'keywords':keywords
+        })
+        if len(articles) >= 10:
+            break
+
+    return json.dumps(articles)
 
 
 if __name__ == "__main__":

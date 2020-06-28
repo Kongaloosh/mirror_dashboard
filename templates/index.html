@@ -14,6 +14,7 @@
 <script src="{{url_for('static', filename='js/stocks_widget.js')}}"></script>
 <script src="{{url_for('static', filename='js/carousel.js')}}"></script>
 <script src="{{url_for('static', filename='js/garden.js')}}"></script>
+<script src="{{url_for('static', filename='js/news.js')}}"></script>
 <body onload="setUp()">
 
 <div class="container-fluid wrapper fill">
@@ -33,8 +34,8 @@
 
     <div class="row h-25">
         <div class="col-sm-12 h-100 d-table">
-            <div class="card card-block d-table-cell align-middle text-center">
-                <p>Events</p>
+            <div  id="news-carousel" class="card card-block d-table-cell row carousel slide boxlayout " data-ride="carousel" data-interval="50000">
+
             </div>
         </div>
     </div>
