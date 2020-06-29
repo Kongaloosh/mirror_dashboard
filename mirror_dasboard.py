@@ -138,6 +138,12 @@ def stocks():
     return json.dumps(data)
 
 
+@app.route("/inspo")
+def inspo():
+    # print(get('https://aether.kongaloosh.com/', headers={'Accept': 'application/json'}).json())
+    return json.dumps(get('https://aether.kongaloosh.com/', headers={'Accept': 'application/json'}).json())
+
+
 @app.route("/news")
 def news():
     source = 'https://www.economist.com/'

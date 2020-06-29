@@ -61,5 +61,3 @@ function news(){
    );
 }
 
-news()
-window.setInterval(news, 60000);

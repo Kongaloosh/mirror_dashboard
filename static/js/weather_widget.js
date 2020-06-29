@@ -46,5 +46,5 @@ function setUp(){
 
 window.setInterval(time, 1000);
 
-window.setInterval(weather, 10000);
+window.setInterval(weather, 600000);
 
