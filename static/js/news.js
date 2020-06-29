@@ -61,3 +61,5 @@ function news(){
    );
 }
 
+news()
+window.setInterval(news, 600000); // every 10 min

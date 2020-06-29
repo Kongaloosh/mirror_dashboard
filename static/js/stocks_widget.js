@@ -157,4 +157,4 @@ function setUp(){
 
 stocks()
 
-window.setInterval(stocks, 1000000);
+window.setInterval(stocks, 600000);

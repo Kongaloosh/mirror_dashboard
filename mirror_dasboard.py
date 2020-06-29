@@ -110,7 +110,7 @@ def show_entries():
 @app.route('/weather')
 def weather():
     """"""
-    return get(f'https://api.openweathermap.org/data/2.5/weather?lat={LAT}&lon={LON}&appid={OW_KEY}&units=metric').json()
+    return get("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}&units=metric".format(LAT,LON,OW_KEY)).json()
 
 @app.route('/garden')
 def garden():

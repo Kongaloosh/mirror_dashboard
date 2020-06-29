@@ -26,4 +26,4 @@ function inspo(){
 
 
 inspo()
-window.setInterval(inspo(), 600000);
+window.setInterval(inspo(), 200000);
