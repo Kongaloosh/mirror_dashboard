@@ -4,7 +4,6 @@ function news(){
         function(request){
             if(request.status >= 200 && request.status < 400){
                 request.json().then(function(data) {
-                    console.log(data)
                     var widget = document.getElementById("news-carousel");
                     var ticker_entries = document.createElement("div");
                     ticker_entries.className = "carousel-inner";
@@ -24,7 +23,7 @@ function news(){
                         ticker_container.append(
                             price
                         ) + " "
-                        console.log(data[idx]['summary'])
+
                         ul = document.createElement('ul');
                         data[idx]['summary'].forEach(function (item) {
                             let li = document.createElement('li');
@@ -32,15 +31,6 @@ function news(){
                             li.innerHTML += item;
                         });
                         ticker_container.appendChild(ul);
-
-
-//
-//                        var price = document.createElement("p")
-//                        price.innerText = "Summary: " + data[idx]['summary']
-//                        price.className = "text-left"
-//                        ticker_container.append(
-//                            price
-//                        ) + " "
 
                         var price = document.createElement("p")
                         price.innerText = "Key Entities: " + data[idx]['keywords'].slice(0,10)

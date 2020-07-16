@@ -3,7 +3,6 @@ function garden_HUD(){
     fetch('/garden')
         .then(
         function(request){
-            console.log(request)
             if(request.status >= 200 && request.status < 400){
                 request.json().then(function(data) {
                     document.getElementById("garden_temperature").innerText = "Temperature: " + data['temperature'].shift().toPrecision(2).toString() + '\u2103';

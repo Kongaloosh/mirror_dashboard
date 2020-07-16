@@ -3,8 +3,8 @@ import sqlite3
 from contextlib import closing
 import os
 from configparser import ConfigParser
+import simplejson as json
 from requests import get
-import json
 import yfinance as yf
 from urllib.error import HTTPError
 import sqlite3
@@ -112,6 +112,7 @@ def weather():
     """"""
     return get("https://api.openweathermap.org/data/2.5/weather?lat={0}&lon={1}&appid={2}&units=metric".format(LAT,LON,OW_KEY)).json()
 
+
 @app.route('/garden')
 def garden():
     return get('http://192.168.1.12:80', headers={'Accept': 'application/json'}).json()
@@ -134,8 +135,10 @@ def stocks():
                 data.append(stock_info)
             except (IndexError, HTTPError):
                 app.logger.info(ticker, yf.Ticker(ticker).info)
-
-    return json.dumps(data)
+    # app.logger.inf(type(data))
+    data = json.dumps(data, ignore_nan=True, default=0)
+    app.logger.info(str(data)[12340:12350])
+    return data
 
 
 @app.route("/inspo")
